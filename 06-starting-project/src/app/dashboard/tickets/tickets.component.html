@@ -1,1 +1,19 @@
-<app-new-ticket />
+<div>
+   <!-- @empty es el fallback si el array esta vacio -->
+   <ul>
+      @for (ticket of tickets; track ticket.id) {
+         <!--  {{ $first }} true para el primero
+               {{ $last }}, {{ $odd }}, {{ $even }}, {{ $count }} la cantidad total de elementos
+         -->
+         <li>
+            <app-ticket [data]="ticket" (close)="onCloseTicket(ticket.id)" />
+         </li>
+      } @empty {
+         <p>No tickets available.</p>
+      }
+   </ul>
+</div>
+
+<div id="new-ticket">
+   <app-new-ticket (add)="onAdd($event)" />
+</div>

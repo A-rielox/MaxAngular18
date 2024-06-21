@@ -1,12 +1,5 @@
-import {
-   Component,
-   ElementRef,
-   HostBinding,
-   HostListener,
-   ViewEncapsulation,
-   inject,
-   input,
-} from '@angular/core';
+// prettier-ignore
+import { Component, ContentChild, ElementRef, HostBinding, HostListener, ViewEncapsulation, contentChild, inject, input } from '@angular/core';
 
 @Component({
    selector: 'app-control',
@@ -16,12 +9,18 @@ import {
    styleUrl: './control.component.css',
    encapsulation: ViewEncapsulation.None,
    host: {
-      class: 'control', // me anade la clase al host y asi quito el <p class="control">, al poner esta clase en el host, no me agarra lo que ponga en el css de aca, porque ese archivo vale solo para lo que esta dentro del host, para ocuparlo asi tengo q tener el encapsulation: ViewEncapsulation.None, o el estilo en style.css
+      class: 'control', // me anade la clase al host y asi quito el <p class="control"> q envolvia todo, al poner esta clase en el host, no me agarra lo que ponga en el css de aca, porque ese archivo vale solo para lo que esta dentro del host, para ocuparlo asi tengo q tener el encapsulation: ViewEncapsulation.None, o el estilo en style.css
       '(click)': 'onClick()', // p' event-binding en el host
    },
 })
 export class ControlComponent {
    label = input.required<string>();
+
+   // @ViewChild o ...Children solo sirve para elementos que estan en el template, en este caso mi template usa proyection con <ng-content /> para "sacar" estos necesito @ContentChild
+   // @ContentChild('input') private ctrl?: ElementRef<HTMLTextAreaElement | HTMLInputElement>;
+   // con Signal
+   private ctrl =
+      contentChild<ElementRef<HTMLTextAreaElement | HTMLInputElement>>('input');
 
    // @HostBinding('class') className = 'control';
    // @HostListener('click') onClick() {
@@ -39,7 +38,7 @@ export class ControlComponent {
 
 /*
 
-x+q en <ng-content> me ponga input o textarea dentro, angular como se fija en el codigo no lo va  a agarrar asi que pongo el "encapsulation: ViewEncapsulation.None," para que los agarre ya que hace los estilos globales
+x+q en <ng-content> me ponga input o textarea dentro , angular como se fija en el codigo no lo va  a agarrar ( como si tuviera un label o input adentro ) asi que pongo el "encapsulation: ViewEncapsulation.None," para que los agarre ya que hace los estilos globales
 
 con encapsulation: ViewEncapsulation.None, NO funciona el :host
 

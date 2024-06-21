@@ -3,6 +3,8 @@
       <input name="title" id="title" #titleInput #input />
    </app-control>
 
+   <!-- #input p' @ContentChild en ControlComponent -->
+
    <app-control label="Request">
       <textarea
          name="request"
@@ -14,7 +16,9 @@
    </app-control>
 
    <p>
-      <button appButton>
+      <!-- como appButton es MI boton, no el normal, al poner la referencia #btn esta va a ser una referencia al componente y NO al HTML "boton" -->
+      <!-- lo mismo pasa al poner una referencia en cualquier componente creado por mi -->
+      <button appButton #btn>
          Submit
          <span class="icon">→</span>
       </button>
