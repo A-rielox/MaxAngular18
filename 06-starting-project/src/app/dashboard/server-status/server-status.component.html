@@ -1,0 +1,27 @@
+<!-- agrega la clase solo si la condicion es verdadera -->
+<!-- <div [class.status]="currentStatus === 'offline'"> -->
+
+<!-- anade las q sean true -->
+<div
+   [class]="{
+      status: true,
+      'status-online': currentStatus === 'online',
+      'status-offline': currentStatus === 'offline',
+      'status-unknown': currentStatus === 'unknown',
+   }"
+>
+   <!-- tambien se pueden pasar estilos de forma condicional cn [style]="{...}" -->
+   <!-- p' font-size usas 'font-size': '44px' o fontSize: variableEn.ts -->
+   <!-- en traffic.html <div [style.height]="(dataPoint.value / maxTraffic) * 100 + '%'"></div> -->
+
+   @if (currentStatus === "online") {
+      <p>Servers are online</p>
+      <p>All systems are operational.</p>
+   } @else if (currentStatus === "offline") {
+      <p>Servers are offline</p>
+      <p>Functionality should be restored soon.</p>
+   } @else {
+      <p>Server status is unknown</p>
+      <p>Fetching server status failed.</p>
+   }
+</div>

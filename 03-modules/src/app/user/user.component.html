@@ -1,0 +1,7 @@
+<app-card>
+   <button [class.active]="selected" (click)="onSelectedUser()">
+      <!-- <img [src]="imagePath()" /> -->
+      <img [src]="imagePath" />
+      <span>{{ user.name || "sin nombre" | titlecase }}</span>
+   </button>
+</app-card>
