@@ -19,13 +19,13 @@ import { FormsModule } from '@angular/forms';
    imports: [ButtonComponent, ControlComponent, FormsModule],
 })
 export class NewTicketComponent implements AfterViewInit, OnInit {
+   add = output<{ title: string; text: string }>(); // en lugar de usar @Output()
+
    // @ViewChild('form') private formRef?: ElementRef<HTMLFormElement>;
    // la nueva form con Signal
    // private formRef = viewChild<ElementRef<HTMLFormElement>>('form');
    // con required p' quitar el ? de this.formRef()?.nativeElement.reset();
    private formRef = viewChild.required<ElementRef<HTMLFormElement>>('form');
-
-   add = output<{ title: string; text: string }>(); // en lugar de usar @Output()
 
    ngOnInit(): void {
       console.log(this.formRef().nativeElement, 'oninit');
@@ -33,7 +33,7 @@ export class NewTicketComponent implements AfterViewInit, OnInit {
 
    // 💥
    ngAfterViewInit() {
-      // aqui esta garantizado el acceso a lo seleccionado con @ViewChild, si lo selecciono con viewChild => tambien tengo acceso desde OnInit
+      // aqui esta garantizado el acceso a lo seleccionado con @ViewChild, si lo selecciono con viewChild ( y no con @ViewChild ) => tambien tengo acceso desde OnInit
       console.log(this.formRef().nativeElement, 'AfterViewInit');
    }
    // lo mismo p' ngAfterContentInit si estoy usando content projection

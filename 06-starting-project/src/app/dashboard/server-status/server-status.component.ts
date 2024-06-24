@@ -1,12 +1,5 @@
-import {
-   Component,
-   DestroyRef,
-   OnDestroy,
-   OnInit,
-   effect,
-   inject,
-   signal,
-} from '@angular/core';
+// prettier-ignore
+import { Component, DestroyRef, OnDestroy, OnInit, effect, inject, signal } from '@angular/core';
 
 @Component({
    selector: 'app-server-status',

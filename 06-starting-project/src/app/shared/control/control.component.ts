@@ -21,6 +21,7 @@ export class ControlComponent {
    // con Signal
    private ctrl =
       contentChild<ElementRef<HTMLTextAreaElement | HTMLInputElement>>('input');
+   // este 'input' es el #input q pongo en el textarea o input
 
    // @HostBinding('class') className = 'control';
    // @HostListener('click') onClick() {
@@ -30,8 +31,6 @@ export class ControlComponent {
    private el = inject(ElementRef); // p' acceder al host de forma programmatically
 
    onClick() {
-      console.log('clicked!!!');
-
       console.log(this.el.nativeElement); // p' acceder al host de forma programmatically
    }
 }
