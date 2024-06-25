@@ -5,7 +5,22 @@
 
    <app-auth />
 
+   <!-- 
    @if(isAdmin()){
-   <p>Solo admins</p>
+      <p>Solo admins</p>
    }
+   -->
+
+   <!-- ng-template envuelve contenido q NO debe ser mostrado inicialmente -->
+   <!-- solo se va a mostrar cuando se ponga mediante this.viewContainerRef.createEmbeddedView(this.templateRef) en la directiva -->
+   <!-- 
+   <ng-template appAuth="admin">
+      <p>Solo admins</p>
+   </ng-template> -->
+
+   <p *appAuth="'admin'" class="protected-content admin">Solo admins</p>
+   <p *appAuth="'user'" class="protected-content unauthenticated">
+      regular users
+   </p>
+   <p *appAuth="'guest'" class="protected-content authenticated">guest users</p>
 </main>
