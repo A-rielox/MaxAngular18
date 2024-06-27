@@ -1,7 +1,8 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { Task, TaskStatus } from '../../task.model';
+import { TASK_STATUS_OPTIONS, Task, TaskStatus } from '../../task.model';
+import { TasksService } from '../../tasks.service';
 
 @Component({
    selector: 'app-task-item',
@@ -11,7 +12,11 @@ import { Task, TaskStatus } from '../../task.model';
    styleUrl: './task-item.component.css',
 })
 export class TaskItemComponent {
+   private taskService = inject(TasksService);
+   // lo pongo como provider en TasksListComponent y este tiene acceso x ser child
+   taskStatusOptions = inject(TASK_STATUS_OPTIONS);
    task = input.required<Task>();
+
    taskStatus = computed(() => {
       switch (this.task().status) {
          case 'OPEN':
@@ -41,5 +46,7 @@ export class TaskItemComponent {
          default:
             break;
       }
+
+      this.taskService.updateTaskStatus(taskId, newStatus);
    }
 }

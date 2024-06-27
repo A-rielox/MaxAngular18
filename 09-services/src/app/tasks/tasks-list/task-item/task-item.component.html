@@ -2,17 +2,30 @@
    [class]="{
       'status-open': task().status === 'OPEN',
       'status-in-progress': task().status === 'IN_PROGRESS',
-      'status-done': task().status === 'DONE'
+      'status-done': task().status === 'DONE',
    }"
 >
    <header>
       <h3>{{ task().title }}</h3>
       <p>{{ taskStatus() }}</p>
    </header>
+
    <p>{{ task().description }}</p>
+
    <form (ngSubmit)="onChangeTaskStatus(task().id, status.value)">
       <select #status>
-         <option value="open" [selected]="task().status === 'OPEN'">
+         @for (option of taskStatusOptions; track option.value) {
+            <option
+               [value]="option.value"
+               [selected]="task().status === option.taskStatus"
+            >
+               {{ option.text }}
+            </option>
+         }
+
+         <!--  -->
+
+         <!-- <option value="open" [selected]="task().status === 'OPEN'">
             Open
          </option>
          <option
@@ -23,8 +36,9 @@
          </option>
          <option value="done" [selected]="task().status === 'DONE'">
             Completed
-         </option>
+         </option> -->
       </select>
+
       <p>
          <button>Change Status</button>
       </p>
